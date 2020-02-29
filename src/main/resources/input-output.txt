@@ -1,0 +1,136 @@
+Open Desktop app for GraphQL Playground
+=======================================
+
+http://localhost:8080/graphql
+
+=======
+#### 1.
+=======
+	{
+	  bookById(id: "book-1") {
+	    id
+	    name
+	    pageCount
+	    author {
+	      firstName
+	      lastName
+	    }
+	  }
+	}
+
+Output:
+-------
+{
+  "data": {
+    "bookById": {
+      "id": "book-1",
+      "name": "Harry Potter and the Philosopher's Stone",
+      "pageCount": 223,
+      "author": {
+        "firstName": "Joanne",
+        "lastName": "Rowling"
+      }
+    }
+  }
+}
+
+
+
+======
+### 2.
+======
+	{
+	  getAllBooks {
+	    id
+	  }
+	  printHello(name: "Vinod Hulloli") 
+	}
+
+
+Output:
+-------
+{
+  "data": {
+    "getAllBooks": [
+      {
+        "id": "book-1"
+      },
+      {
+        "id": "book-2"
+      },
+      {
+        "id": "book-3"
+      }
+    ],
+    "printHello": "Hello : Vinod Hulloli"
+  }
+}
+
+
+======
+### 3:
+======
+
+mutation addBook($book:BookInput){
+  addBook(book: $book) {
+    id
+    name
+    pageCount
+    author {
+      firstName
+      lastName
+    }
+  }
+}
+
+query variables section in graphql:
+
+{
+  "book": {
+    "name": "Vinod",
+    "pageCount":2,
+    "author": {
+      "firstName":"hi",
+      "lastName": "bye"
+    }
+  }
+}
+
+
+Output:
+-------
+
+{
+  "data": {
+    "addBook": null
+  },
+  "errors": [
+    {
+      "message": "Exception while fetching data (/addBook) : null",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "path": [
+        "addBook"
+      ]
+    }
+  ]
+}
+
+
+======
+### 4:
+======
+mutation {
+  addBook(name: "Vinod", pageCount: "20", firstName: "hi", lastName: "bye") {
+    id
+  }
+}
+
+
+Output:
+
+.....

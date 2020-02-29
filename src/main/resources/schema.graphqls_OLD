@@ -1,0 +1,38 @@
+ schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    bookById(id: ID): Book
+    getAllBooks: [Book]
+    printHello(name: String): String
+}
+
+type Mutation {
+  	addBook(book: BookInput): [Book]
+}
+
+type Book {
+    id: ID
+    name: String
+    pageCount: Int
+    author: Author
+}
+
+type Author {
+    id: ID
+    firstName: String
+    lastName: String
+}
+
+input BookInput {
+    name: String
+    pageCount: Int
+    author: AuthorInput
+}
+
+input AuthorInput {
+    firstName: String
+    lastName: String
+}
